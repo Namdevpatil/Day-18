@@ -1,4 +1,4 @@
-package com.demo;
+package com.demo1;
 
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +14,7 @@ public class FetchObjects
 	public static void main(String[] args) {
 
 		Configuration configuration = new Configuration();
-		configuration.configure("hibernate.cfg.xml").addAnnotatedClass(Employee.class);
+		configuration.configure("hibernate.cfg2.xml").addAnnotatedClass(Product.class);
 
 		//3. SessionFactory object connected with Configuration object
 		SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -22,24 +22,24 @@ public class FetchObjects
 		//session-1 
 		Session session = sessionFactory.openSession();
 
-		Query<Employee> query=session.createQuery("From Employee");
+		Query<Product> query=session.createQuery("From Product", Product.class);
 		//HQL query: From Employee
 		//SQL query: select * from employee;
 		
-		List<Employee> list = query.list();
+		List<Product> list = query.list();
 		
-		for(Employee employee: list)
+		for(Product employee: list)
 		{
 			System.out.println(employee.toString());
 		}
 		
 		System.out.println("============================================================");
 		
-		Query<Employee> query1=session.createQuery("From Employee e1 where e1.id = 2100");
+		Query<Product> query1=session.createQuery("From Product p1 where p1.id = 2011", Product.class);
 				
-		List<Employee> list1 = query1.list();
+		List<Product> list1 = query1.list();
 		
-		for(Employee employee: list1)
+		for(Product employee: list1)
 		{
 			System.out.println(employee.toString());
 		}
@@ -47,16 +47,21 @@ public class FetchObjects
 		
 		System.out.println("============================================================");
 		
-		Query<Employee> query2=session.createQuery("SELECT e1.name, e1.role From Employee e1");
+		Query query2=session.createQuery("SELECT p1.name, p1.price From Product p1", Product.class);
 		
-		List<Employee> list2 = query2.list();
+		List list2 = query2.list();
 		
-		Iterator<Employee> iterator = list2.iterator();
+		Iterator iterator = list2.iterator();
 		
 		while(iterator.hasNext())
 		{
-			Employee employee = iterator.next();
-			System.out.println(employee);
+			Object objects[] = (Object[])iterator.next();
+			
+			for(Object object: objects)
+			{
+				System.out.println(object.toString());
+			}
+			System.out.println();
 		}
 		
 	}

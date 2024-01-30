@@ -40,8 +40,8 @@ public class SaveObjects
 		  Session session1 = sessionFactory.openSession();//2. Session object connected with SessionFactory object
 		  
 		  Employee employee1 = new Employee(); 
-		  employee1.setId(2100);
-		  employee1.setName("Raj"); 
+		  employee1.setId(3344);
+		  employee1.setName("Kiran"); 
 		  employee1.setRole("Software Developer");
 		  
 		  Transaction transaction1 = session1.getTransaction();//1.2 Transaction object connected with Session object
@@ -57,8 +57,10 @@ public class SaveObjects
 		  
 		  Session session2 = sessionFactory.openSession();
 		  
-		  Employee employee2 = new Employee(); employee2.setId(7865);
-		  employee2.setName("John"); employee2.setRole("Java Full stack Developer");
+		  Employee employee2 = new Employee(); 
+		  employee2.setId(1122);
+		  employee2.setName("Harish"); 
+		  employee2.setRole("Python Full Stack Developer");
 		  
 		  Transaction transaction2 = session2.getTransaction(); 
 		  transaction2.begin();
